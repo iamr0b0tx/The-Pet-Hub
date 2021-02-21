@@ -20,16 +20,16 @@
                 <hr>
             </div>
         </div>
-    </div> 
+    </div>
      <div class="row">
          <div class="col-12 col-lg-6">
-           
+
            </div>
         </div>
-           
- {% endblock %}
 
- {% extends 'base.html' %} {% block content %}
+{# {% endblock %}#}
+
+{# {% extends 'base.html' %} {% block content %}#}
 
 <div class="container">
   <div class="row">
@@ -40,7 +40,7 @@
         <p class="card-text ">{{ object.content | safe }}</p>
       </div>
     </div>
-    {% block sidebar %} {% include 'sidebar.html' %} {% endblock sidebar %}
+    {% block sidebar %} {% include 'blog/sidebar.html' %} {% endblock sidebar %}
   </div>
 </div>
 
