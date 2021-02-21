@@ -24,7 +24,7 @@ def post_detail(request, slug):
     comments = post.comments.filter(active=True)
     new_comment = None
     # Comment Posted
-    if request.method == 'POST':
+    if request.user.is_authenticated and request.method == 'POST':
         comment_form = CommentForm(data=request.POST)
         if comment_form.is_valid():
             # Create Comment object but don't save to database yet
