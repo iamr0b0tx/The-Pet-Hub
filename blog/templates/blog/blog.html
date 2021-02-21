@@ -1,33 +1,11 @@
 {% extends "base.html" %}
 
-{% block page_header %}
-<div class="container header-container">
-    <div class="row">
-         <div class="col"></div>
-    </div>
-</div>
-{% endblock %}
+{% block page_header %} {% include 'blog/page_header.html' %} {% endblock %}
 
 
 {% block content %}
 
-{#    <div class="overlay"></div>#}
-    <div class="container">
-        <div class="row">
-            <div class="col">
-                <hr>
-                <h2 class="logo-font mb-4" style="color:white">The Pet Hub Blog</h2>
-                <hr>
-            </div>
-        </div>
-    </div> 
-     <div class="row">
-         <div class="col-12 col-lg-6">
-           
-           </div>
-        </div>
-           
- <div class="container">
+<div class="container">
     <div class="row">
         <!-- Blog Entries Column -->
         <div class="col-md-8 mt-3 left">
@@ -52,4 +30,4 @@
         {% block sidebar %} {% include 'blog/sidebar.html' %} {% endblock sidebar %}
     </div>
 </div>
-{%endblock%}
+{% endblock %}

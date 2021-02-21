@@ -1,32 +1,9 @@
 {% extends "base.html" %}
 
-{% block page_header %}
-<div class="container header-container">
-    <div class="row">
-         <div class="col"></div>
-    </div>
-</div>
-{% endblock %}
+{% block page_header %} {% include 'blog/page_header.html' %} {% endblock %}
 
 
 {% block content %}
-
-    <div class="overlay"></div>
-    <div class="container">
-        <div class="row">
-            <div class="col">
-                <hr>
-                <h2 class="logo-font mb-4">The Pet Hub Blog</h2>
-                <hr>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-12 col-lg-6">
-
-        </div>
-    </div>
-
 
 <div class="container">
   <div class="row">
@@ -35,7 +12,7 @@
         <h1>{% block title %} {{ post.title }} {% endblock title %}</h1>
         <p class=" text-muted">{{ post.author }} | {{ post.created_on }}</p>
         <img src="{{ post.image.url }}" style="max-width: 100%"/>
-        <p class="card-text ">{{ post.content | safe }}</p>
+        <p class="card-text ">{{ post.content | safe | linebreaks }}</p>
       </div>
     </div>
     {% block sidebar %} {% include 'blog/sidebar.html' %} {% endblock sidebar %}
