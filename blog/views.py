@@ -1,5 +1,9 @@
-from django.shortcuts import render, get_object_or_404
-from .forms import CommentForm
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import render, get_object_or_404, redirect
+from django.urls import reverse
+
+from .forms import CommentForm, PostForm
 from django.views import generic
 from .models import Post
 
@@ -23,7 +27,6 @@ def post_detail(request, slug):
     if request.method == 'POST':
         comment_form = CommentForm(data=request.POST)
         if comment_form.is_valid():
-
             # Create Comment object but don't save to database yet
             new_comment = comment_form.save(commit=False)
             # Assign the current post to the comment
@@ -36,3 +39,29 @@ def post_detail(request, slug):
                                            'comments': comments,
                                            'new_comment': new_comment,
                                            'comment_form': comment_form})
+
+
+@login_required
+def add_post(request):
+    """ Admin add post to blog """
+    if not request.user.is_superuser:
+        messages.error(request, 'Sorry this is an admin only section')
+        return redirect(reverse('blog'))
+
+    if request.method == 'POST':
+        form = PostForm(request.POST, request.FILES)
+        if form.is_valid():
+            post = form.save()
+            messages.success(request, 'Success! Your post was added')
+            return redirect(reverse('post_detail', args=[post.slug]))
+        else:
+            messages.error(request, 'Post not added. Please check that your submission is valid')
+    else:
+        form = PostForm()
+
+    template = 'blog/add_post.html'
+    context = {
+        'form': form,
+    }
+
+    return render(request, template, context)
