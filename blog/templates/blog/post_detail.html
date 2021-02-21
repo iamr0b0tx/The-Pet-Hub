@@ -26,7 +26,7 @@
         {% for comment in comments %}
         <div class="comments" style="padding: 10px;">
           <p class="font-weight-bold">
-            {{ comment.name }}
+            {{ comment.author.username }}
             <span class=" text-muted font-weight-normal">
               {{ comment.created_on }}
             </span>
@@ -47,7 +47,7 @@
             {% else %}
             <h3>Leave a comment</h3>
             <form method="post" style="margin-top: 1.3em;">
-              {{ comment_form.as_p }}
+              {{ comment_form.body }} <br />
               {% csrf_token %}
               <button type="submit" class="btn btn-primary  btn-lg">Submit</button>
             </form>
